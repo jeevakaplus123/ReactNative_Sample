@@ -26,9 +26,11 @@ class Home extends Component{
         <Text style={styles.welcome}>
           Welcome to Home page!
         </Text>
+{/* 
         <Text style={styles.instructions}>
-       lalala
+     {this.props.textInput}
         </Text>
+         */}
         <Text style={styles.instructions}>
           {instructions}
         </Text>
