@@ -31,7 +31,7 @@ class Main extends Component{
     _onPress() {
        
         Actions.home();
-        // this.props.iffysituation({
+        // this.props.sample({
         //     textInput: "123",
         //   });
        }
