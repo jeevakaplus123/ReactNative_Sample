@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { sample } from "./Home";
 import {
   Platform,
   StyleSheet,
@@ -17,7 +16,7 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-class Main extends Component{
+export default class Main extends Component{
 
     constructor(props) {
         super(props);
@@ -29,11 +28,7 @@ class Main extends Component{
       }
 
     _onPress() {
-       
-        Actions.home();
-        // this.props.sample({
-        //     textInput: "123",
-        //   });
+        Actions.home({ title: "This title is chanaka's value passed via Navigation"});
        }
   render() {
     return (
@@ -67,13 +62,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-const mapStateToProps = ({sample}) => {
-    const {  } = sample;
-  
-    return {  };
-  };
-  
-  export default connect(mapStateToProps, {
-    sample,
-    
-  })(Main);

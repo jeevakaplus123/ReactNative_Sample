@@ -5,9 +5,10 @@ import ReduxThunk from "redux-thunk";
 import Router from "./Router";
 import reducers from "./reducers";
 
+const store = createStore(reducers, undefined, applyMiddleware(ReduxThunk));
+
 class App extends Component {
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={store}>
         <Router />

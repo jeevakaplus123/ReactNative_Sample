@@ -4,46 +4,88 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput,
+  Button
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-// export const iffysituation = ({ textInput}) => (dispatch) => {
-
-// }
+import { incrementCounterByOne, decrementCounterByOne, setCounterValue } from '../actions/index';
 
 
 class Home extends Component{
+
+  constructor() {
+    super();
+    this.state= {
+      number: '',
+    }
+    this._onPressInc = this._onPressInc.bind(this);
+    this._onPressDec = this._onPressDec.bind(this);
+    this._onPressSet = this._onPressSet.bind(this);
+  }
+
+  _onPressInc() {
+    this.props.incrementCounterByOne();
+  }
+
+  _onPressDec(){
+    this.props.decrementCounterByOne();
+  }
+
+  _onPressSet(){
+    this.props.setCounterValue(this.state.number);
+  }
+  
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Home page!
-        </Text>
-{/* 
-        <Text style={styles.instructions}>
-     {this.props.textInput}
-        </Text>
-         */}
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Text style={{ fontSize: 17, color: 'red', margin: 30}}>{this.props.title}</Text>
+
+      <View style={{ flexDirection: 'row'}}>
+      <Text style={{ fontSize: 15 }}>Counter: </Text>
+      <Text style={{ fontSize: 18, color: 'blue' }}>{this.props.counter.value}</Text>
+      </View>
+
+      <Button onPress={this._onPressInc} title="Increment By 1" color="#FF5478"/>
+      <Button onPress={this._onPressDec} title="Decrement By 1" color="#FF5478"/>
+      <Button onPress={this._onPressSet} title="Set Value" color="#FF5478"/>
+
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={(number) => this.setState({number})}
+        value={this.state.number}
+      />
+
       </View>
     );
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    counter: state.counter,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    incrementCounterByOne: () => dispatch(incrementCounterByOne()),
+    decrementCounterByOne: () => dispatch(decrementCounterByOne()),
+    setCounterValue: (val) => dispatch(setCounterValue(val)),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 30,
+    paddingVertical: 50,
     backgroundColor: '#F5FCFF',
   },
   welcome: {
@@ -57,4 +99,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-export default Home;

@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
-import sampleReducer from "./sampleReducer";
+import counterReducer from "./counterReducer";
 
 export default combineReducers({
-  sample: sampleReducer
-
+  counter: counterReducer
 });
